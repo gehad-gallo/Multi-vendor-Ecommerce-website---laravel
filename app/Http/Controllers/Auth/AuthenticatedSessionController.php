@@ -33,7 +33,11 @@ class AuthenticatedSessionController extends Controller
     $user = auth()->user();
 
     if ($user->hasRole('admin')) {
-        return redirect()->route('admin.dashboard');
+        Auth::logout();
+        return redirect()->route('login')->withErrors([
+            'email' => 'Invalid Credentials',
+        ]);
+        //return redirect()->route('admin.dashboard');
     } elseif ($user->hasRole('vendor')) {
         return redirect()->route('vendor.dashboard');
     } else {

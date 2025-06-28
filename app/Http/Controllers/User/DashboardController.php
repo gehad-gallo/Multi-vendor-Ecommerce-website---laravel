@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index() {
         //if (auth()->user()->hasRole('user')) {
-            return view('dashboard');
+            return view('user.dashboard');
         //}
     }
 }

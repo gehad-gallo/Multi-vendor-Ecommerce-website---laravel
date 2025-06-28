@@ -7,6 +7,8 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Vendor\DashboardController as VendorDashboardController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Models\User;
 
 /*
@@ -67,10 +69,21 @@ Route::get('/roles_permissions', function(){
     dd('done');
 });
 
+// Admin login 
+Route::middleware('guest')->group(function () {
+    Route::get('/admin/login', [AdminLoginController::class, 'show'])->name('admin.login');
+    Route::post('/admin/login', [AdminLoginController::class, 'postLogin'])->name('admin.post.login');
+});
+
 // Admin dashboard
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('admin.logout');
+
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+    Route::post('/profile', [AdminProfileController::class, 'udpateAdminInfo'])->name('update.admin.info');
 });
+
 
 // Vendor dashboard
 Route::middleware(['auth', 'role:vendor'])->prefix('vendor')->group(function () {
