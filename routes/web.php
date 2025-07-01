@@ -80,8 +80,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('admin.logout');
 
-    Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
-    Route::post('/profile', [AdminProfileController::class, 'udpateAdminInfo'])->name('update.admin.info');
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('show.admin.info');
+    Route::get('/edit/profile', [AdminProfileController::class, 'edit'])->name('edit.admin.info');
+    Route::post('/edit/profile', [AdminProfileController::class, 'udpateAdminInfo'])->name('update.admin.info');
+    Route::post('/edit/password', [AdminProfileController::class, 'updateAdminPassword'])->name('update.admin.password');
 });
 
 
