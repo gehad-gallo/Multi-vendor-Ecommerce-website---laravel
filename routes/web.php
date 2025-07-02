@@ -9,6 +9,7 @@ use App\Http\Controllers\Vendor\DashboardController as VendorDashboardController
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Models\User;
 
 /*
@@ -21,11 +22,11 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 /*
+Route::get('/', function () {
+    return view('front_end.home.home');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -84,6 +85,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/edit/profile', [AdminProfileController::class, 'edit'])->name('edit.admin.info');
     Route::post('/edit/profile', [AdminProfileController::class, 'udpateAdminInfo'])->name('update.admin.info');
     Route::post('/edit/password', [AdminProfileController::class, 'updateAdminPassword'])->name('update.admin.password');
+});
+
+
+// Front End routes
+Route::middleware('guest')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 });
 
 
