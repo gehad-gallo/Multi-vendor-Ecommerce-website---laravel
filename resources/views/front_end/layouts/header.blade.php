@@ -21,25 +21,6 @@
                           </form>
                       </div>
                   </div>
-                  <div class="col-xl-5 col-3 col-md-3 col-lg-6">
-                      <div class="wsus__call_icon_area">
-                          <div class="wsus__call_area">
-                              <div class="wsus__call">
-                                  <i class="fas fa-user-headset"></i>
-                              </div>
-                              <div class="wsus__call_text">
-                                  <p>example@gmail.com</p>
-                                  <p>+569875544220</p>
-                              </div>
-                          </div>
-                          <ul class="wsus__icon_area">
-                              <li><a href="wishlist.html"><i class="fal fa-heart"></i><span>05</span></a></li>
-                              <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li>
-                              <li><a class="wsus__cart_icon" href="#"><i
-                                          class="fal fa-shopping-bag"></i><span>04</span></a></li>
-                          </ul>
-                      </div>
-                  </div>
               </div>
           </div>
           <div class="wsus__mini_cart">

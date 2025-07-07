@@ -24,11 +24,13 @@ class RedirectIfAuthenticated
                 $user = Auth::guard($guard)->user();
 
                 if ($user->hasRole('admin')) {
-                    return redirect(RouteServiceProvider::ADMIN_HOME);
+                    //return redirect(RouteServiceProvider::ADMIN_HOME);
+                    return redirect()->route('admin.dashboard');
                 } elseif ($user->hasRole('vendor')) {
-                    return redirect(RouteServiceProvider::VENDOR_HOME);
+                    //return redirect(RouteServiceProvider::VENDOR_HOME);
+                    return redirect()->route('vendor.dashboard');
                 } else {
-                    return redirect(RouteServiceProvider::HOME); // Default: normal user
+                    return redirect()->route('user.dashboard'); // Default: normal user
                 }
             }
         }

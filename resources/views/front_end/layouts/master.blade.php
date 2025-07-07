@@ -26,9 +26,18 @@
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/responsive.css')}}">
     <!-- <link rel="stylesheet" href="{{asset('/frontend/assets/css/rtl.css')}}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
+    @if ($errors->has('error'))
+        <script>
+            toastr.error("{{ $errors->first('error') }}");
+        </script>
+    @endif
 
     <!--============================
         HEADER START
@@ -50,23 +59,7 @@
     @yield('content')
 
 
-    <!-- sections -->
-    @include('front_end.sections.mobile_menu')
-    @include('front_end.sections.product_model_view')
-    @include('front_end.sections.banner_part_2')
-    @include('front_end.sections.flash_sell')
-    @include('front_end.sections.monthly_top_product')
-    @include('front_end.sections.brand_slider')
-    @include('front_end.sections.single_banner')
-    @include('front_end.sections.hot_deals')
-    @include('front_end.sections.electronic_part_1')
-    @include('front_end.sections.electronic_part_2')
-    @include('front_end.sections.large_banner')
-    @include('front_end.sections.weekly_best_item')
-    @include('front_end.sections.home_service')
-    @include('front_end.sections.home_blogs')
     
-
     @include('front_end.layouts.footer')
 
 
@@ -115,9 +108,27 @@
     <script src="{{asset('/frontend/assets/js/venobox.min.js')}}"></script>
     <!--classycountdown js-->
     <script src="{{asset('/frontend/assets/js/jquery.classycountdown.js')}}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--main/custom js-->
     <script src="{{asset('/frontend/assets/js/main.js')}}"></script>
+    <script>
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    
+        @if(session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+    
 </body>
 
 </html>

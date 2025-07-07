@@ -26,24 +26,27 @@ class AuthenticatedSessionController extends Controller
    
 
     public function store(LoginRequest $request): RedirectResponse
-{
-    $request->authenticate();
-    $request->session()->regenerate();
+    {
+        try {
+            $request->authenticate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->withInput($request->only('email'))
+                ->with('error', 'Email or password is incorrect');
+        }
 
-    $user = auth()->user();
+        $request->session()->regenerate();
+        $user = auth()->user();
 
-    if ($user->hasRole('admin')) {
-        Auth::logout();
-        return redirect()->route('login')->withErrors([
-            'email' => 'Invalid Credentials',
-        ]);
-        //return redirect()->route('admin.dashboard');
-    } elseif ($user->hasRole('vendor')) {
-        return redirect()->route('vendor.dashboard');
-    } else {
-        return redirect()->route('user.dashboard');
+        if ($user->hasRole('admin')) {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Not Allowed!');
+        } elseif ($user->hasRole('vendor')) {
+            return redirect()->route('vendor.dashboard')->with('success', 'login successfully!');
+        } else {
+            return redirect()->route('user.dashboard')->with('success', 'login successfully!');
+        }
     }
-}
 
 
     /**

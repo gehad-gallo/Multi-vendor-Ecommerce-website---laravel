@@ -61,12 +61,12 @@ Route::get('/roles_permissions', function(){
     //$user = \App\Models\User::find(15);
     //$user->assignRole('vendor');
 
-    //$user = \App\Models\User::find(16);
-    //$user->assignRole('user');
+    $user = \App\Models\User::find(30);     //vendor 1
+    $user->assignRole('vendor');
 
 
-    $user = User::find(23);
-    $user->assignRole('admin');
+    //$user = User::find(23);
+    //$user->assignRole('admin');
     dd('done');
 });
 
@@ -102,4 +102,5 @@ Route::middleware(['auth', 'role:vendor'])->prefix('vendor')->group(function () 
 // User dashboard
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::post('/logout', [UserDashboardController::class, 'logout'])->name('user.logout');
 });
