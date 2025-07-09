@@ -24,20 +24,16 @@
 
   <link rel="stylesheet" href="{{asset('/frontend/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('/frontend/assets/css/responsive.css')}}">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
 <body>
 
 
-
   <!--=============================
     DASHBOARD MENU START
   ==============================-->
-  @include('front_end.dashboard.layouts.header')
+  @include('vendor.layouts.header')
   <!--=============================
     DASHBOARD MENU END
   ==============================-->
@@ -48,7 +44,7 @@
   ==============================-->
   <section id="wsus__dashboard">
     <div class="container-fluid">
-      @include('front_end.dashboard.layouts.sidebar')
+      @include('vendor.layouts.sidebar')
       @yield('content')
     </div>
   </section>
@@ -105,26 +101,6 @@
 
   <!--main/custom js-->
   <script src="{{asset('/frontend/assets/js/main.js')}}"></script>
-  <script>
-    @if(session('success'))
-        toastr.success("{{ session('success') }}");
-    @endif
-
-    @if(session('error'))
-        toastr.error("{{ session('error') }}");
-    @endif
-
-    @if(session('warning'))
-        toastr.warning("{{ session('warning') }}");
-    @endif
-
-    @if(session('info'))
-        toastr.info("{{ session('info') }}");
-    @endif
-
-
-    
-</script>
 </body>
 
 </html>

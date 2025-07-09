@@ -12,4 +12,10 @@ class DashboardController extends Controller
             return view('vendor.dashboard');
         //}
     }
+
+
+    public function logout(){
+        auth()->logout();
+        return redirect()->route('home');
+    }
 }

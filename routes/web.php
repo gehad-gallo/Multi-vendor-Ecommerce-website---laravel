@@ -10,6 +10,7 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\User;
 
 /*
@@ -97,10 +98,16 @@ Route::middleware('guest')->group(function () {
 // Vendor dashboard
 Route::middleware(['auth', 'role:vendor'])->prefix('vendor')->group(function () {
     Route::get('/dashboard', [VendorDashboardController::class, 'index'])->name('vendor.dashboard');
+    Route::post('/logout', [VendorDashboardController::class, 'logout'])->name('vendor.logout');
 });
 
 // User dashboard
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('/logout', [UserDashboardController::class, 'logout'])->name('user.logout');
+
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::get('/profile/edit', [UserProfileController::class, 'edit'])-> name('user.profile.edit');
+    Route::post('/profile/update', [UserProfileController::class, 'updateUserInfo'])-> name('user.profile.update');
+    Route::post('/profile/password-update', [UserProfileController::class, 'updateUserPassword'])->name('user.password.update');
 });
