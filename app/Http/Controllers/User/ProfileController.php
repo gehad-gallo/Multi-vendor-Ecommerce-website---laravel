@@ -12,7 +12,6 @@ class ProfileController extends Controller
 {
     public function index(){
         $user = auth()->user();
-        //dd($user);
         return view('front_end.dashboard.profile', compact('user'));
     }
 
@@ -52,6 +51,7 @@ class ProfileController extends Controller
         ]);
 
         return redirect()->route('user.profile')->with('success', 'Your info updated successfully.');
+        
     }
 
 

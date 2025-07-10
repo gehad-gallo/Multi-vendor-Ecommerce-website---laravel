@@ -33,12 +33,7 @@
 </head>
 
 <body>
-    @if ($errors->has('error'))
-        <script>
-            toastr.error("{{ $errors->first('error') }}");
-        </script>
-    @endif
-
+    
     <!--============================
         HEADER START
     ==============================-->
