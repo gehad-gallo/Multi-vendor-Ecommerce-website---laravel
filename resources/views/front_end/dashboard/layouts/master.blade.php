@@ -24,14 +24,19 @@
 
   <link rel="stylesheet" href="{{asset('/frontend/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('/frontend/assets/css/responsive.css')}}">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
 <body>
-
+  @if ($errors->has('error'))
+  <script>
+      toastr.error("{{ $errors->first('error') }}");
+  </script>
+@endif
 
 
   <!--=============================

@@ -50,6 +50,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Registered and logged in successfully!');
+        return redirect()->route('user.dashboard')->with('success', 'Registered and logged in successfully!');
     }
 }

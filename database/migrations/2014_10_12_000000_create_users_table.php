@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role_id');
+            //$table->integer('role_id');
             $table->rememberToken();
             $table->timestamps();
         });

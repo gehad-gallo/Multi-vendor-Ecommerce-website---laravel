@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\Vendor\VendorProfileController;
 use App\Models\User;
 
 /*
@@ -99,6 +100,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', 'role:vendor'])->prefix('vendor')->group(function () {
     Route::get('/dashboard', [VendorDashboardController::class, 'index'])->name('vendor.dashboard');
     Route::post('/logout', [VendorDashboardController::class, 'logout'])->name('vendor.logout');
+    
+    Route::get('/profile', [VendorProfileController::class, 'index'])->name('vendor.profile');
+    Route::get('/profile/edit', [VendorProfileController::class, 'edit'])->name('vendor.profile.edit');
+    Route::post('profile/update', [VendorProfileController::class, 'updateVendorInfo'])->name('vendor.profile.update');
+    route::post('profile/password-update', [VendorProfileController::class, 'updatVendorPassword'])->name('vendor.password.update');
 });
 
 // User dashboard
