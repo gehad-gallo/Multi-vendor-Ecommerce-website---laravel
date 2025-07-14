@@ -79,6 +79,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // Admin dashboard
+/*
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('admin.logout');
@@ -87,7 +88,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/edit/profile', [AdminProfileController::class, 'edit'])->name('edit.admin.info');
     Route::post('/edit/profile', [AdminProfileController::class, 'udpateAdminInfo'])->name('update.admin.info');
     Route::post('/edit/password', [AdminProfileController::class, 'updateAdminPassword'])->name('update.admin.password');
-});
+});*/
 
 
 // Front End routes
