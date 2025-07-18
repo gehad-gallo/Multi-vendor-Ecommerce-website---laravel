@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\StoreSliderRequest;
+use App\Http\Requests\Admin\UpdateSliderRequest;
 use App\Models\Slider;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Log;
+use Yajra\DataTables\DataTables;
+use App\DataTables\SliderDataTable;
 
 class SliderController extends Controller
 {
@@ -15,11 +18,12 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SliderDataTable $dataTable)
     {
-        return view('admin.slider.index');
+        return $dataTable->render('admin.slider.index');
+        
     }
-
+   
     /**
      * Show the form for creating a new resource.
      */
@@ -70,22 +74,54 @@ class SliderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSliderRequest $request, string $id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        try {
+            $bannerPath = $this->updateImage($request, 'banner', 'admin/sliders', $slider->banner);
+
+            // Update other fields and use the new banner path
+            $slider->update([
+                'type' => $request->type,
+                'title' => $request->title,
+                'starting_price' => $request->starting_price,
+                'btn_url' => $request->btn_url,
+                'serial' => $request->serial,
+                'status' => $request->status,
+                'banner' => $bannerPath, 
+            ]);
+
+            return redirect()->route('admin.slider.index')->with('success', 'Slider updated successfully');
+        
+        } catch (\Exception $e) {
+            Log::error('Slider update failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        
+        $slider = Slider::findOrFail($id);
+        $delete_image = $this->deleteImage($slider->banner);
+        
+        if ($delete_image) {
+            $slider->delete();
+            return redirect()->route('admin.slider.index')->with('success', 'Slider deleted successfully');
+        }
+    
+        return redirect()->back()->with('error', 'Failed to delete image. Slider not deleted.');
+     
     }
 }

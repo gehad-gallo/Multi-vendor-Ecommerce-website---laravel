@@ -30,6 +30,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
+<style>
+    .slick-dots {
+    display: none !important;
+}
+</style>
 </head>
 
 <body>
@@ -104,6 +113,11 @@
     <!--classycountdown js-->
     <script src="{{asset('/frontend/assets/js/jquery.classycountdown.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+   
     <!--main/custom js-->
     <script src="{{asset('/frontend/assets/js/main.js')}}"></script>
     <script>
@@ -123,7 +137,9 @@
             toastr.info("{{ session('info') }}");
         @endif
     </script>
-    
+
+
+    @stack('scripts')
 </body>
 
 </html>
