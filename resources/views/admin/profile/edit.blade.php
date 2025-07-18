@@ -21,7 +21,7 @@
                         {{-- Profile Edit Form --}}
                         <div class="col-12 col-md-12 col-lg-7">
                           <div class="card">
-                            <form method="POST" action="{{ route('update.admin.info') }}" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.update.info') }}" class="needs-validation" novalidate enctype="multipart/form-data">
                               @csrf
                   
                               <div class="card-header">
@@ -90,7 +90,7 @@
                         {{-- Password Update Form --}}
                         <div class="col-12 col-md-12 col-lg-7">
                           <div class="card">
-                            <form method="POST" action="{{ route('update.admin.password') }}" class="needs-validation" novalidate>
+                            <form method="POST" action="{{ route('admin.update.password') }}" class="needs-validation" novalidate>
                               @csrf
                   
                               <div class="card-header">
