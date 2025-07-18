@@ -16,3 +16,19 @@
           @include('front_end.sections.home_service')
           @include('front_end.sections.home_blogs')
 @endsection
+
+@push('scripts')
+      <script>
+          $(document).ready(function(){
+              $('.banner_slider').slick({
+                  infinite: true,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  autoplay: true,
+                  autoplaySpeed: 250,
+                  dots: false 
+
+              });
+          });
+      </script>
+@endpush
