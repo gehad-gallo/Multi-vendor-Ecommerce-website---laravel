@@ -7,8 +7,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Admin\SliderController;
-
-
+use App\Http\Controllers\Admin\CategoryController;
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('logout');
 
@@ -20,3 +19,8 @@ Route::post('/edit/password', [AdminProfileController::class, 'updateAdminPasswo
 
 // slider route
 Route::resource('slider', SliderController::class);
+
+
+// Categories route
+Route::put('/category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change.status');
+Route::resource('category', CategoryController::class);
