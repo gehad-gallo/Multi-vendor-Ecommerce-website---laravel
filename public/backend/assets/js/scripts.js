@@ -79,6 +79,7 @@ $(function() {
     }, 600);
   }
 
+
   var sidebar_dropdown = function() {
     if($(".main-sidebar").length) {
       $(".main-sidebar").niceScroll(sidebar_nicescroll_opts);
