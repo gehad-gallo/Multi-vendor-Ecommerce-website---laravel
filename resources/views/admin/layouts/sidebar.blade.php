@@ -23,7 +23,10 @@
         <a href="#" class="nav-link"><i class="fas fa-images"></i><span>Manage Categories</span></a>
         <ul class="dropdown-menu" style="display: none;">
           <li>
-            <a class="nav-link" href="{{ route('admin.category.index') }}">all categories</a>
+            <a class="nav-link" href="{{ route('admin.category.index') }}">categories</a>
+          </li>
+          <li>
+            <a class="nav-link" href="{{ route('admin.sub-category.index') }}">sub categories</a>
           </li>
         </ul>
       </li>
