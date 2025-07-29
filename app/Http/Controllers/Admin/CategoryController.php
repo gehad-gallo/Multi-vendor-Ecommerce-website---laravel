@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\Categories\StoreCategoryRequest;
 use App\Http\Requests\Admin\Categories\UpdateCategoryRequest;
 use App\Traits\ImageUploadTrait;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -103,14 +105,15 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::findOrFail($id);
-        $delete_image = $this->deleteImage($category->image);
-
-        if($delete_image){
+        try {
+            $image = $category->image;
             $category->delete();
+            $this->deleteImage($image);
             return redirect()->route('admin.category.index')->with('success', 'Category removed successfully!');
+        } catch (Exception $e) {
+            return redirect()->route('admin.category.index')->with('error', "Can't be deleted. Category has related sub-categories!");
         }
-        $category->delete();
-        return redirect()->back()->with('error', 'Failed to delete image');
+        
     }
 
 

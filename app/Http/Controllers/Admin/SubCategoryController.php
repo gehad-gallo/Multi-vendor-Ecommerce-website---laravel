@@ -9,6 +9,9 @@ use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\Admin\SubCategories\StoreSubCategoryRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class SubCategoryController extends Controller
 {
@@ -86,9 +89,16 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $sub_category = SubCategory::findOrFail($id);
-        $sub_category->delete();
-        return redirect()->route('admin.sub-category.index')->with('success', 'Sub category deleted successfully!');
+        $subCategory = SubCategory::findOrFail($id);
+
+        try {
+            $subCategory->delete();
+            return redirect()->route('admin.sub-category.index')
+                            ->with('success', 'Sub-category deleted successfully!');
+        } catch (Exception $e) {
+            return redirect()->route('admin.sub-category.index')
+                            ->with('error', "Can't be deleted. This sub-category has related child-categories!");
+        }
     }
 
     public function changeStatus(Request $request){

@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
-
+use App\Http\Controllers\Admin\ChildCategoryController;
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('logout');
@@ -31,3 +31,8 @@ Route::resource('category', CategoryController::class);
 // SubCategory routes
 Route::put('/sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub_category.change.status');
 Route::resource('sub-category', SubCategoryController::class);
+
+// Child-Category routes 
+Route::get('/child-category/get-sub-categories/{category_id}', [ChildCategoryController::class, 'get_sub_categories'])->name('child_category.get_sub_categories');
+Route::put('/child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child_category.change.status');
+Route::resource('child-category', ChildCategoryController::class);

@@ -28,6 +28,9 @@
           <li>
             <a class="nav-link" href="{{ route('admin.sub-category.index') }}">sub categories</a>
           </li>
+          <li>
+            <a class="nav-link" href="{{ route('admin.child-category.index') }}">child categories</a>
+          </li>
         </ul>
       </li>
     </ul>

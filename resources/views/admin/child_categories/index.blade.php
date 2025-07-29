@@ -5,7 +5,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Categories</h1>
+            <h1>Child Categories</h1>
         </div>
 
         <div class="section-body">
@@ -14,7 +14,7 @@
                     <div class="card-header">
                       <h4>Categories List</h4>
                       <div class="ml-auto">
-                              <form action="{{route('admin.category.create')}}">
+                              <form action="{{route('admin.child-category.create')}}">
                               <button class="btn btn-primary">+ Create New</button>
                               </form>
                       </div>
@@ -42,7 +42,7 @@
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You want to delete this category, sub-categories related and their children!",
+                text: "You want to delete this category! and childern related!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -59,13 +59,14 @@
 
 
 
-    $(document).ready(function () {
+
+$(document).ready(function () {
     $('body').on('change', '.change-status', function () {
         let isChecked = $(this).is(':checked') ? 1 : 0;
         let id = $(this).data('id');
 
         $.ajax({
-            url: '{{ route("admin.category.change.status") }}',
+            url: '{{ route("admin.child_category.change.status") }}',
             method: 'PUT',
             data: {
                 _token: '{{ csrf_token() }}',
