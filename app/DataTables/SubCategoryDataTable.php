@@ -22,6 +22,10 @@ class SubCategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+
+        ->addColumn('category_name', function ($subcategory) {
+            return optional($subcategory->category)->name;
+        })
         ->addColumn('action', function ($subcategory) {
             return view('admin.sub_categories.partials.actions', compact('subcategory'))->render();
         })
@@ -78,7 +82,7 @@ class SubCategoryDataTable extends DataTable
             Column::make('slug'),
             Column::make('icon'),
             Column::make('status'),
-            Column::make('category_id'),
+            Column::make('category_name')->title('Category'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
