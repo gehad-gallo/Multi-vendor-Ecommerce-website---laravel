@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
+use App\Http\Controllers\Backend\BrandController;
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 Route::get('/logout', [AdminLoginController::class, 'adminLogout'])->name('logout');
@@ -22,6 +23,12 @@ Route::post('/edit/password', [AdminProfileController::class, 'updateAdminPasswo
 
 // slider routes
 Route::resource('slider', SliderController::class);
+
+
+// Brands routes
+Route::put('/brands/change-status', [BrandController::class, 'changeStatus'])->name('brands.change.status');
+Route::resource('brands', BrandController::class);
+
 
 
 // Categories routes

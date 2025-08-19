@@ -45,6 +45,7 @@ trait ImageUploadTrait
                     $image->move(public_path("uploads/{$path}/"), $fileName);
 
                     return "/uploads/{$path}/{$fileName}";
+                    
                 }
 
                 // No new file uploaded; keep the old one

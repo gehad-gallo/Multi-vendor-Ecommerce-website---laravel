@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <title>Sazao || e-Commerce HTML Template</title>
+    <title>Sazao</title>
     <link rel="icon" type="{{asset('/frontend/assets/images/png')}}" href="images/favicon.png">
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/bootstrap.min.css')}}">
@@ -39,6 +39,7 @@
     display: none !important;
 }
 </style>
+
 </head>
 
 <body>
@@ -47,6 +48,7 @@
         HEADER START
     ==============================-->
     @include('front_end.layouts.header')
+
     <!--============================
         HEADER END
     ==============================-->
@@ -56,6 +58,10 @@
         MAIN MENU START
     ==============================-->
     @include('front_end.layouts.nav')
+
+
+    @include('front_end.sections.mobile_menu')
+
     <!--============================
         MAIN MENU END
     ==============================-->
@@ -78,10 +84,35 @@
     ==============================-->
 
 
+    
+    
+    <!--main/custom js-->
+    <script src="{{asset('/frontend/assets/js/main.js')}}"></script>
+    <script>
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    
+        @if(session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Only once! -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <!--jquery library js-->
     <script src="{{asset('/frontend/assets/js/jquery-3.6.0.min.js')}}"></script>
     <!--bootstrap js-->
-    <script src="{{asset('/frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
     <!--font-awesome js-->
     <script src="{{asset('/frontend/assets/js/Font-Awesome.js')}}"></script>
     <!--select2 js-->
@@ -110,34 +141,11 @@
     <script src="{{asset('/frontend/assets/js/isotope.pkgd.min.js')}}"></script>
     <!--venobox js-->
     <script src="{{asset('/frontend/assets/js/venobox.min.js')}}"></script>
-    <!--classycountdown js-->
     <script src="{{asset('/frontend/assets/js/jquery.classycountdown.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-   
-    <!--main/custom js-->
     <script src="{{asset('/frontend/assets/js/main.js')}}"></script>
-    <script>
-        @if(session('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-    
-        @if(session('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
-    
-        @if(session('warning'))
-            toastr.warning("{{ session('warning') }}");
-        @endif
-    
-        @if(session('info'))
-            toastr.info("{{ session('info') }}");
-        @endif
-    </script>
 
+    <!-- Bootstrap (bundle includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @stack('scripts')
 </body>

@@ -38,23 +38,23 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         try{
-        // Upload the image
-        $imagePath = $this->uploadImage($request, 'image', 'admin/categories');
-
-        // create new category
-        Category::create([
-            'name'       =>$request->name,
-            'image'      =>$imagePath,
-            'slug'       =>$request->slug,
-            'status'     =>$request->status,
-        ]);
-        return redirect()->route('admin.category.index')->with('success', 'Category created successfully');
-    } catch(\Exception $e) {
-        Log::error('Category creation failed: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'Something went wrong. Please try again.');
-    }
-
-
+            // Upload the image
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('admin/categories', 'public');
+            }
+            // create new category
+            Category::create([
+                'name'       =>$request->name,
+                'image'      =>$imagePath,
+                'slug'       =>$request->slug,
+                'status'     =>$request->status,
+            ]);
+            return redirect()->route('admin.category.index')->with('success', 'Category created successfully');
+        } catch(\Exception $e) {
+            Log::error('Category creation failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+        }
     }
 
     /**
