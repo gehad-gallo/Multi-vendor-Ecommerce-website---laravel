@@ -47,4 +47,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+
+     // Check if user is Admin
+     public function isAdmin(): bool
+     {
+         return $this->hasRole('admin');
+     }
+ 
+     // Check if user is Vendor
+     public function isVendor(): bool
+     {
+         return $this->hasRole('vendor');
+     }
+ 
+     // Check if user has BOTH roles
+     public function isAdminAndVendor(): bool
+     {
+         return $this->hasAllRoles(['admin', 'vendor']);
+     }
+ 
+     // Check if user is just a normal User (no admin/vendor roles)
+     public function isUser(): bool
+     {
+         return $this->hasRole('user');
+     }
+
 }

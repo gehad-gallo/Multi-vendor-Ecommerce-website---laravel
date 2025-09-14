@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -10,9 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use App\Models\Brand;
 
-class BrandDataTables extends DataTable
+class ProductDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,31 +22,20 @@ class BrandDataTables extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('logo', function ($brand) {
-                return '<img src="' . asset($brand->logo) . '" height="50" width="70">';
-
-            })
-            ->addColumn('action', 'branddatatables.action')
-
-            ->rawColumns(['action', 'status', 'logo', 'is_featured']) // allow HTML rendering
-
-            ->addColumn('action', function ($brand) {
-                return view('admin.brands.partials.actions', compact('brand'))->render();
-            })
-            ->addColumn('is_featured', function ($brand) {
-                return view('admin.brands.partials.is_featured', compact('brand'))->render();
-            })
-            ->addColumn('status', function ($brand) {
-                return view('admin.brands.partials.status', compact('brand'))->render();
-            })
-            ->setRowId('id');
+        ->editColumn('thumb_image', function ($product) {
+            return '<img src="' . asset($product->thumb_image) . '" height="50" width="70">';
+        })
+        ->addColumn('action', function ($product) {
+            return view('admin.products.partials.actions', compact('product'))->render();
+        })
+        ->rawColumns(['action', 'thumb_image'])
+        ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    
-    public function query(Brand $model): QueryBuilder
+    public function query(Product $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -57,7 +46,7 @@ class BrandDataTables extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('branddatatables-table')
+                    ->setTableId('product-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -72,9 +61,9 @@ class BrandDataTables extends DataTable
                         Button::make('reload')
                     ])
                     ->parameters([
-                        'processing' => false,
+                        'processing' => false, 
                         'language'   => [
-                            'processing' => ''
+                            'processing' => '' 
                         ],
                     ]);
     }
@@ -85,17 +74,15 @@ class BrandDataTables extends DataTable
     public function getColumns(): array
     {
         return [
-            
-            Column::make('name')->with(200),
-            Column::make('logo'),
-            Column::make('slug'),
-            Column::make('is_featured'),
-            Column::make('status'),
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('price'),
+            Column::make('thumb_image')->title('Image'),
             Column::computed('action')
-              ->exportable(false)
-              ->printable(false)
-              ->width(100)
-              ->addClass('text-center'),
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 
@@ -104,6 +91,6 @@ class BrandDataTables extends DataTable
      */
     protected function filename(): string
     {
-        return 'BrandDataTables_' . date('YmdHis');
+        return 'Product_' . date('YmdHis');
     }
 }

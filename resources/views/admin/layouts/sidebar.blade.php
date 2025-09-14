@@ -23,6 +23,19 @@
         </li>
     </ul>
 
+    {{-- Ecommerce  --}}
+    <ul class="sidebar-menu">
+        <li class="menu-header">Ecommerce</li>
+        <li class="dropdown has-dropdown {{ set_active(['admin.vendor-profile.*']) }}">
+            <a href="#" class="nav-link"><i class="fas fa-images"></i><span>Ecommerce</span></a>
+            <ul class="dropdown-menu"">
+                <li class="{{ set_active(['admin.vendor-profile.index']) }}">
+                    <a class="nav-link" href="{{ route('admin.vendor-profile.index') }}">Vendor profile</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
     {{-- Product --}}
     <ul class="sidebar-menu">
         <li class="menu-header">Product</li>
@@ -31,6 +44,9 @@
             <ul class="dropdown-menu">
                 <li class=" {{ set_active(['admin.brands.index']) }}">
                     <a class="nav-link" href="{{ route('admin.brands.index') }}">Brands</a>
+                </li>
+                <li class=" {{ set_active(['admin.products.index']) }}">
+                    <a class="nav-link" href="{{ route('admin.products.index') }}">Products</a>
                 </li>
             </ul>
         </li>

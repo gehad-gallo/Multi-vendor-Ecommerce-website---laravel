@@ -63,8 +63,8 @@ Route::get('/roles_permissions', function(){
     //$user = \App\Models\User::find(15);
     //$user->assignRole('vendor');
 
-    $user = \App\Models\User::find(30);     //vendor 1
-    $user->assignRole('vendor');
+    $user = \App\Models\User::find(32);     //vendor 1
+    $user->assignRole('admin');
 
 
     //$user = User::find(23);

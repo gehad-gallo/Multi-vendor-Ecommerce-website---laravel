@@ -64,6 +64,12 @@ class CategoryDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
+                    ])
+                    ->parameters([
+                        'processing' => false, 
+                        'language'   => [
+                            'processing' => '' 
+                        ],
                     ]);
     }
 

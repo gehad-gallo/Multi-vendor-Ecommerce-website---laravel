@@ -1,24 +1,20 @@
-<!-- Loader -->
-<div id="loading-overlay">
-    <div class="spinner"></div>
-</div>
 @extends('admin.layouts.master')
-@section('title', 'Categories')
+@section('title', 'Products')
 
 @section('content')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Categories</h1>
+            <h1>Products</h1>
         </div>
 
         <div class="section-body">
             <div class="container-fluid">
                 <div class="card shadow-sm">
                     <div class="card-header">
-                      <h4>Categories List</h4>
+                      <h4>Products List</h4>
                       <div class="ml-auto">
-                              <form action="{{route('admin.brands.create')}}">
+                              <form action="{{route('admin.products.create')}}">
                               <button class="btn btn-primary">+ Create New</button>
                               </form>
                       </div>
@@ -46,7 +42,7 @@
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You want to delete this category, sub-categories related and their children!",
+                text: "You want to delete this Brand!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
